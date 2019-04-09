@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IEmpDao">
+    <resultMap id="EmpMapper" type="Emp">
+        <id column="empno" property="empno"/>
+        <result column="empName" property="empName"/>
+        <association property="dept" javaType="Dept">
+            <id column="deptno" property="deptno"/>
+            <result column="deptName" property="deptname"/>
+        </association>
+    </resultMap>
+    <resultMap id="EmpMultiMapper" type="Emp">
+            <id column="empno" property="empno"/>
+            <result column="empName" property="empName"/>
+        <!--column里面写的是部门编号，第二条SQL需要通过部门编号获取部门对象-->
+        <association property="dept" javaType="dept" column="deptno" select="selectDeptInfoByDeptNo">
+        </association>
+    </resultMap>
+
+    <!--根据员工编号获取，员工名称以及所属部门-->
+    <select id="getEmpInfoByNo" resultMap="EmpMapper">
+        select * from emp,dept
+        where dept.deptno=emp.empno
+        and empno=#{empno}
+    </select>
+<!--首先根据部门编号查到-->
+    <select id="selectDeptInfoByDeptNo" resultType="dept">
+        SELECT * from dept
+        where deptno=#{deptno}
+    </select>
+
+    <!--根据员工编号获取，员工名称以及所属部门  多条sql-->
+    <select id="getEmpInfoByNoMutilSQL" resultMap="EmpMultiMapper">
+        select * from emp
+        where empno=#{empno}
+    </select>
+</mapper>

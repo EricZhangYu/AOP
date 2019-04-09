@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IDeptDao"><!--命名空间  就是接口的类名-->
+    <resultMap id="DeptMapper" type="Dept">
+        <id column="deptno" property="deptno"></id>
+        <result column="deptName" property="deptname"></result>
+        <collection property="emps" ofType="Emp" >
+            <id column="empno" property="empno"></id>
+            <result column="empName" property="empname"></result>
+        </collection>
+    </resultMap>
+    <resultMap id="DeptMapperMultiSQL" type="Dept">
+        <!-- property：主键在实体类中的属性名 -->
+        <!-- column：主键在数据库中的列名 -->
+        <id column="deptno" property="deptno"></id>
+        <result column="deptName" property="deptname"></result>
+        <!--
+            ofType：集合中每一项的类型  AofB     B集合中每一个元素的类型
+            select:和现有的映射文件中的某一个SQL的id一致
+            column:第一条SQL投影出的数据表列中某一列一致 ，依赖上次投影结果的某列
+
+            <collection  property="pojo对象中集合属性"
+                        ofType="集合属性中的pojo对象"
+                        select="嵌套的查询语句" >
+                        column="传递给嵌套查询语句的字段参数"
+        -->
+        <collection property="emps"  ofType="Emp" select="selectEmpsByDeptNo" column="deptno">
+        </collection>
+    </resultMap>
+
+    <select id="getDeptById" resultMap="DeptMapper">
+        select * from dept,emp
+        where dept.deptno=emp.deptno
+        and dept.deptno=#{deptno}
+    </select>
+
+    <select id="getDeptByIdMultiSQL" resultMap="DeptMapperMultiSQL">
+        select * from dept
+        where dept.deptno=#{deptno}
+    </select>
+
+    <!--根据传递过来的部门编号查询该部门的人员-->
+    <select id="selectEmpsByDeptNo" resultType="Emp">
+        select * from emp
+        where deptno=#{deptno}
+    </select>
+</mapper>

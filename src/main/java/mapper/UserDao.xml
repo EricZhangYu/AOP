@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserDao"><!--命名空间  就是接口的类名-->
+    <!--<resultMap id="UserMapper" type="User">-->
+    <!--<id column="id" property="id"></id>-->
+    <!--<result column="userName" property="userName"></result>-->
+    <!--</resultMap>-->
+    <select id="findAll" resultType="entity.User">
+        select * from smbms_user
+    </select>
+
+    <select id="findById" resultType="entity.User">
+        select * from smbms_user where id=#{id}
+    </select>
+
+    <insert id="addUser">
+        INSERT into smbms_user (userCode,userName,userPassword)
+        VALUES (#{userCode},#{userName},#{userPassword})
+    </insert>
+
+    <update id="update">
+        UPDATE smbms_user set userName=#{userName} where id=#{id}
+    </update>
+
+    <delete id="delete">
+        DELETE from smbms_user WHERE id=#{id}
+    </delete>
+<!--添加之后返回最大值-->
+    <insert id="addStudentAndReturnMax">
+        INSERT into smbms_user (userCode,userName,birthday,userPassword)
+        VALUES (#{userCode},#{userName},#{birthday},#{userPassword})
+        <selectKey keyProperty="id" resultType="int">
+            select @@IDENTITY
+        </selectKey>
+    </insert>
+
+    <!--模糊查询  有三种方法
+    select * from smbms_user where userName like '%#{userName}%'
+    select * from smbms_user where userName like concat('%',#{userName},'%')
+    select * from smbms_user where userName like '%${value}%'-->
+    <select id="likeSelect" resultType="User">
+        select * from smbms_user where userName like concat('%',#{userName},'%')
+    </select>
+
+    <select id="selectByCondition" resultType="User">
+        select * from smbms_user where userName like '%'#{userName}'%' and address like '%'#{address}'%'
+    </select>
+
+    <select id="selectByMap" resultType="User">
+        select * from smbms_user where userName like concat('%',#{myuserName},'%') and  address like concat('%',#{myaddress},'%')
+    </select>
+
+    <select id="ifTag" resultType="User">
+        select * from smbms_user
+        <where>
+            <if test="userName!=null">
+                and userName=#{userName}
+            </if>
+            <if test="address!=null">
+                and address=#{address}
+            </if>
+        </where>
+    </select>
+
+    <select id="chooseTag" resultType="User">
+        select * from smbms_user
+        <where>
+            <choose>
+                <when test="userName!=null">
+                    and userName=#{userName}
+                </when>
+            </choose>
+            <choose>
+                <when test="address!=null">
+                  and address=#{address}
+                </when>
+            </choose>
+        </where>
+    </select>
+    <select id="foreachTag" resultType="User">
+        select * from smbms_user
+        <if test="array.length>0">
+            where id IN
+            <foreach collection="array" open="(" close=")" separator="," item="myid">
+                #{myid}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="foreachTagList" resultType="User">
+        select * from smbms_user
+        <if test="list.size>0">
+            where id IN
+            <foreach collection="list" open="(" close=")" separator="," item="myid">
+                #{myid}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="foreachTagListUser" resultType="User">
+        select * from smbms_user
+        <if test="list.size>0">
+            where id IN
+            <foreach collection="list" open="(" close=")" separator="," item="user">
+                #{user.id}
+            </foreach>
+        </if>
+    </select>
+</mapper>

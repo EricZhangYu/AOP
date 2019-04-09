@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--mybatis大配置文件 configuration-->
+<configuration>
+    <properties resource="database.properties"/>
+
+    <settings>
+        <!--自动映射行为的设置，给Mapper用的，关联对象或者单个对象-->
+        <setting name="autoMappingBehavior" value="FULL"/>
+        <!--延迟加载设置-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--在全局开二缓-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <!--别名-->
+    <typeAliases>
+        <package name="entity"></package>
+    </typeAliases>
+    <!--环境-->
+    <environments default="development">
+        <!--一个环境-->
+        <environment id="development">
+            <!--事务ACID Mybatis 管理事务-->
+            <transactionManager type="JDBC"/>
+            <!--数据源-->
+            <dataSource type="POOLED">
+                <!--驱动-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <!--连接字符串-->
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--关联小配置-->
+        <mapper resource="mapper/UserDao.xml"/>
+        <mapper resource="mapper/RoleDao.xml"/>
+        <mapper resource="mapper/DeptMapper.xml"/>
+        <mapper resource="mapper/EmpMapper.xml"/>
+        <mapper resource="mapper/StudentDao.xml"/>
+    </mappers>
+</configuration>
