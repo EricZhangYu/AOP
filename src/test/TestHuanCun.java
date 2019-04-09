@@ -27,7 +27,7 @@ public class TestHuanCun {
         }
         MybatisUtil.closeSession(session);
 
-        System.out.println("===================");
+        System.out.println("===================122222222222222");
 
         SqlSession session2=MybatisUtil.getSession();
         StudentDao dao2=session2.getMapper(StudentDao.class);
