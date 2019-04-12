@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+   <bean id="MyCollections" class="cn.spring.day06.MyCollections">
+      <property name="array">
+         <array>
+            <value>qqq</value>
+            <value>www</value>
+         </array>
+      </property>
+
+   <property name="list">
+         <list>
+            <value>1212</value>
+            <value>2323</value>
+         </list>
+      </property>
+
+      <property name="set">
+         <set>
+            <value>aaa</value>
+            <value>bbb</value>
+         </set>
+      </property>
+
+      <property name="map">
+         <map>
+            <entry key="003">
+               <value>2016我的毕业季</value>
+            </entry>
+            <entry key="001">
+               <value>2016我的就业季</value>
+            </entry>
+            <entry key="002">
+               <value>2016我的工作季</value>
+            </entry>
+         </map>
+      </property>
+
+      <property name="properties">
+         <props>
+            <prop key="001">001</prop>
+            <prop key="002">002</prop>
+         </props>
+      </property>
+   </bean>
+</beans>

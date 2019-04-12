@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+   <!--自动装配最长用的两种方式：
+      bytype:只要Spring容器中有类型匹配的对象A，就可以直接将A作为另一个bean的域属性，装配成功
+
+      byName：需要保持一致(实体类的属性名  和  bean的id名一致，即装配成功)  如果不一致，则装配失败
+     -->
+
+   <!--部门-->
+      <bean id="dept" class="cn.spring.day05autoWair.Dept">
+      <property name="deptno" value="1"></property>
+      <property name="deptname" value="开发部"></property>
+   </bean>
+   <!--员工-->
+   <bean id="emp" class="cn.spring.day05autoWair.Emp" autowire="byType">
+      <property name="empno" value="1"></property>
+      <property name="empnam" value="杨幂"></property>
+   </bean>
+</beans>

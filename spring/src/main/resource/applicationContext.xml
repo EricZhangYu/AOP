@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="helloService" class="cn.spring.day01.HelloService">
+        <property name="info" value="Spring例子没成功便成仁"></property>
+    </bean>
+
+    <!--初始化一个车-->
+    <bean id="myCar" class="cn.spring.day01.entity.Car">
+        <property name="brand" value="兰博基尼"></property>
+        <property name="color" value="蓝色"></property>
+    </bean>
+    <!--初始化一个人-->
+    <bean id="person" class="cn.spring.day01.entity.Person">
+            <property name="name" value="狗子"></property>
+            <property name="age" value="20"></property>
+            <!--给域属性赋值，不能使用value，得用ref-->
+            <property name="car" ref="myCar"></property>
+    </bean>
+</beans>

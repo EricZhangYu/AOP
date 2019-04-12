@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="colorInk" class="cn.spring.day02printer.ColorInk"></bean>
+    <bean id="A4Paper" class="cn.spring.day02printer.A4Paper"></bean>
+
+    <bean id="Printer" class="cn.spring.day02printer.Printer">
+        <property name="ink" ref="colorInk"></property>
+        <property name="paper" ref="A4Paper"></property>
+    </bean>
+</beans>
