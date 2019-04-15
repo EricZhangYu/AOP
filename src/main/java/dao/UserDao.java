@@ -30,7 +30,8 @@ public interface UserDao {
     //多条件查询  Map
     public List<User> selectByMap(Map<String,Object> map);
 
-    //智能标签 if  通过用户姓名查询用户信息
+    //智能标签
+    // if  通过用户姓名查询用户信息
     public List<User> ifTag(User user);
 
     //choose     通过用户姓名查询用户信息

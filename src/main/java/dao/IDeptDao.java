@@ -8,8 +8,8 @@ import entity.Dept;
  * @Date 2019/4/8 9:41
  **/
 public interface IDeptDao {
-    //单条SQL  一对多
+    //一对多 单条sql语句
     public Dept getDeptById(int deptno) throws Exception;
-    //多条SQL单表
+    //一对多 多条sql语句
     public Dept getDeptByIdMultiSQL(int BuMenNo) throws Exception;
 }

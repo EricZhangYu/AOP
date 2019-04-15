@@ -2,7 +2,6 @@ import dao.IDeptDao;
 import dao.StudentDao;
 import entity.Dept;
 import entity.Student;
-import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import utils.MybatisUtil;
@@ -27,7 +26,7 @@ public class TestHuanCun {
         }
         MybatisUtil.closeSession(session);
 
-        System.out.println("===================122222222222222");
+        System.out.println("===================");
 
         SqlSession session2=MybatisUtil.getSession();
         StudentDao dao2=session2.getMapper(StudentDao.class);

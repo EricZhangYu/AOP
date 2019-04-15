@@ -18,6 +18,5 @@ public class Test {
         System.out.println(book.getBookName());
         System.out.println(book.getBookPrice());
         System.out.println(book.getPub().getPubliName());
-
     }
 }
